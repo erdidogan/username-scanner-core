@@ -1,0 +1,212 @@
+[
+  {
+    "siteName": "BuyMeACoffee",
+    "siteUrl": "https://www.buymeacoffee.com/{}",
+    "siteIconUrl": "https://www.buymeacoffee.com/assets/img/bmc-meta-new/new/apple-icon-60x60.png?version=2021.05.11.08.46.22",
+    "siteRegisterUrl": "https://www.buymeacoffee.com/{}"
+  },
+  {
+    "siteName": "BuzzFeed",
+    "siteUrl": "https://www.buzzfeed.com/{}",
+    "siteIconUrl": "https://www.buzzfeed.com/static-assets/img/favicon.5a0c77a8815cfcc67c710199054a55c6.ico",
+    "siteRegisterUrl": "https://www.buzzfeed.com/{}"
+  },
+  {
+    "siteName": "Disqus",
+    "siteUrl": "https://disqus.com/by/{}",
+    "siteIconUrl": "https://c.disquscdn.com/next/current/home/img/brand/apple-touch-icon-60x60.png",
+    "siteRegisterUrl": "https://disqus.com/by/{}"
+  },
+  {
+    "siteName": "Facebook",
+    "siteUrl": "https://en-gb.facebook.com/{}",
+    "siteIconUrl": "https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRJ1GG_y0J.ico",
+    "siteRegisterUrl": "https://en-gb.facebook.com/{}"
+  },
+  {
+    "siteName": "Github",
+    "siteUrl": "https://api.github.com/users/{}",
+    "siteIconUrl": "https://github.com/fluidicon.png",
+    "siteRegisterUrl": "https://github.com/{}"
+  },
+  {
+    "siteName": "Medium",
+    "siteUrl": "https://medium.com/@{}",
+    "siteIconUrl": "https://miro.medium.com/fit/c/60/60/1*sHhtYhaCe2Uc3IU0IgKwIQ.png",
+    "siteRegisterUrl": "https://medium.com/@{}"
+  },
+  {
+    "siteName": "9GAG",
+    "siteUrl": "https://9gag.com/u/{}",
+    "siteIconUrl": "https://9gag.com/favicon.ico",
+    "siteRegisterUrl": "https://9gag.com/u/{}"
+  },
+  {
+    "siteName": "Quora",
+    "siteUrl": "https://www.quora.com/profile/{}",
+    "siteIconUrl": "https://qsf.fs.quoracdn.net/-4-images.favicon.ico-26-ebf6a9e7f7b4576d.ico",
+    "siteRegisterUrl": "https://www.quora.com/profile/{}"
+  },
+  {
+    "siteName": "SoundCloud",
+    "siteUrl": "https://soundcloud.com/{}",
+    "siteIconUrl": "https://a-v2.sndcdn.com/assets/images/sc-icons/ios-a62dfc8fe7.png",
+    "siteRegisterUrl": "https://soundcloud.com/{}"
+  },
+  {
+    "siteName": "Vimeo",
+    "siteUrl": "https://vimeo.com/{}",
+    "siteIconUrl": "https://f.vimeocdn.com/images_v6/favicon.ico?85987028c39a030b4783a100f20f8c78486f3865",
+    "siteRegisterUrl": "https://vimeo.com/{}"
+  },
+  {
+    "siteName": "VK",
+    "siteUrl": "https://vk.com/{}",
+    "siteIconUrl": "https://vk.com/images/icons/pwa/apple/default.png",
+    "siteRegisterUrl": "https://vk.com/{}"
+  },
+  {
+    "siteName": "Youtube",
+    "siteUrl": "https://www.youtube.com/{}",
+    "siteIconUrl": "https://www.youtube.com/s/desktop/19da7d5c/img/favicon_96.png",
+    "siteRegisterUrl": "https://www.youtube.com/{}"
+  },
+  {
+    "siteName": "TikTok",
+    "siteUrl": "https://www.tiktok.com/api/register/check/login/name/?login_name={}",
+    "siteIconUrl": "https://s16.tiktokcdn.com/musical/resource/mtact/static/images/logo_144c91a.png",
+    "siteRegisterUrl": "https://www.tiktok.com/@{}",
+    "message": "true"
+  },
+  {
+    "siteName": "Twitter",
+    "siteUrl": "https://api.twitter.com/i/users/username_available.json?username={}",
+    "siteIconUrl": "https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc7275.png",
+    "siteRegisterUrl": "https://www.twitter.com/{}",
+    "message": "true"
+  },
+  {
+    "siteName": "Reddit",
+    "siteUrl": "https://www.reddit.com/api/username_available.json?user={}",
+    "siteIconUrl": "https://www.redditinc.com/assets/images/site/logo01.svg",
+    "siteRegisterUrl": "https://www.reddit.com/user/{}",
+    "message": "true"
+  },
+  {
+    "siteName": "HackerNews",
+    "siteUrl": "https://hacker-news.firebaseio.com/v0/user/{}.json",
+    "siteIconUrl": "https://news.ycombinator.com/favicon.ico",
+    "siteRegisterUrl": "https://news.ycombinator.com/user?id={}",
+    "message": "null"
+  },
+  {
+    "siteName": "Patreon",
+    "siteUrl": "https://www.patreon.com/{}",
+    "siteIconUrl": "https://c5.patreon.com/external/favicon/favicon.ico?v=69kMELnXkB",
+    "siteRegisterUrl": "https://www.patreon.com/{}"
+  },
+  {
+    "siteName": "Behance",
+    "siteUrl": "https://www.behance.net/{}",
+    "siteIconUrl": "https://a5.behance.net/bc3ec3c82f39c6802d5b5a4930ce8d87c8e1b1ae/img/site/apple-touch-icon.png?cb=264615658",
+    "siteRegisterUrl": "https://www.behance.net/{}"
+  },
+  {
+    "siteName": "DEV Community",
+    "siteUrl": "https://dev.to/{}",
+    "siteIconUrl": "https://res.cloudinary.com/practicaldev/image/fetch/s--E8ak4Hr1--/c_limit,f_auto,fl_progressive,q_auto,w_32/https://dev-to.s3.us-east-2.amazonaws.com/favicon.ico",
+    "siteRegisterUrl": "https://dev.to/{}",
+    "message": "404"
+  },
+  {
+    "siteName": "DailyMotion",
+    "siteUrl": "https://www.dailymotion.com/{}",
+    "siteIconUrl": "https://static1.dmcdn.net/images/neon/favicons/android-icon-36x36.png.vef49e2d9e48d19cf2",
+    "siteRegisterUrl": "https://www.dailymotion.com/{}"
+  },
+  {
+    "siteName": "Flickr",
+    "siteUrl": "https://www.flickr.com/people/{}",
+    "siteIconUrl": "https://combo.staticflickr.com/pw/images/favicons/favicon-196.png",
+    "siteRegisterUrl": "https://www.flickr.com/people/{}"
+  },
+  {
+    "siteName": "Pinterest",
+    "siteUrl": "https://www.pinterest.com/{}",
+    "siteIconUrl": "https://s.pinimg.com/webapp/style/images/favicon-54a5b2af.png",
+    "siteRegisterUrl": "https://www.pinterest.com/{}"
+  },
+  {
+    "siteName": "Signal",
+    "siteUrl": "https://community.signalusers.org/u/{}",
+    "siteIconUrl": "https://community.signalusers.org/uploads/db3609/optimized/2X/e/e662ec3ca247ebe468fc1b2e60139f47f0798307_2_32x32.png",
+    "siteRegisterUrl": "https://community.signalusers.org/u/{}",
+    "message": "Oops!"
+  },
+  {
+    "siteName": "Dribbble",
+    "siteUrl": "https://dribbble.com/{}",
+    "siteIconUrl": "https://cdn.dribbble.com/assets/favicon-b38525134603b9513174ec887944bde1a869eb6cd414f4d640ee48ab2a15a26b.ico",
+    "siteRegisterUrl": "https://dribbble.com/{}"
+  },
+  {
+    "siteName": "Ebay",
+    "siteUrl": "https://www.ebay.com/usr/{}",
+    "siteIconUrl": "https://pages.ebay.com/favicon.ico",
+    "siteRegisterUrl": "https://www.ebay.com/usr/{}",
+    "message": "The User ID you entered was not found. Please check the User ID and try again."
+  },
+  {
+    "siteName": "Foursquare",
+    "siteUrl": "https://foursquare.com/{}",
+    "siteIconUrl": "https://foursquare.com/static/img/favicon/favicon-32x32.png",
+    "siteRegisterUrl": "https://foursquare.com/{}"
+  },
+  {
+    "siteName": "Giphy",
+    "siteUrl": "https://giphy.com/explore/{}",
+    "siteIconUrl": "https://giphy.com/static/img/favicon.png",
+    "siteRegisterUrl": "https://giphy.com/explore/{}"
+  },
+  {
+    "siteName": "Kaggle",
+    "siteUrl": "https://www.kaggle.com/{}",
+    "siteIconUrl": "https://www.kaggle.com/static/images/favicon.ico",
+    "siteRegisterUrl": "https://www.kaggle.com/{}"
+  },
+  {
+    "siteName": "Steam",
+    "siteUrl": "https://steamcommunity.com/id/{}",
+    "siteIconUrl": "https://store.steampowered.com/favicon.ico",
+    "siteRegisterUrl": "https://steamcommunity.com/id/{}",
+    "message": "The specified profile could not be found."
+  },
+  {
+    "siteName": "Tinder",
+    "siteUrl": "https://www.gotinder.com/@{}",
+    "siteIconUrl": "https://tinder.com/favicon-32x32.png",
+    "siteRegisterUrl": "https://www.gotinder.com/@{}",
+    "message": "Looking for Someone?"
+  },
+  {
+    "siteName": "Instagram",
+    "siteUrl": "https://www.instagram.com/accounts/web_create_ajax/attempt/",
+    "siteIconUrl": "https://instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png",
+    "siteRegisterUrl": "https://www.instagram.com/{}",
+    "message": "\"code\": \"username_is_taken\"",
+    "contentType": "application/x-www-form-urlencoded",
+    "body": "username=####"
+  },
+  {
+    "siteName": "Twitch",
+    "siteUrl": "https://gql.twitch.tv/gql",
+    "siteIconUrl": "https://m.twitch.tv/apple-touch-icon.png",
+    "siteRegisterUrl": "https://www.twitch.tv/{}",
+    "message": "\"isUsernameAvailable\":false",
+    "contentType": "application/json",
+    "body": "{\"operationName\":\"UsernameValidator_User\",\"variables\":{\"username\":\"####\"},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"fd1085cf8350e309b725cf8ca91cd90cac03909a3edeeedbd0872ac912f3d660\"}}}"
+  }
+]
+
+
+
