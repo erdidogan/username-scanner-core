@@ -11,10 +11,20 @@ This repo contains core logic. Please checkout [frontend part](https://github.co
 * Java 11 Http Client
 * Webflux
 * Netty
+* Docker
 
 ## Author
 
 [Erdi Doğan](https://www.linkedin.com/in/doganerdi)
+
+## Deployment
+
+Pull docker image: 
+> docker pull erdiapps/uname-api:1.0
+
+Run :
+
+> docker run -p 8383:8383 erdiapps/uname-api:1.0
 
 
 ## Contributions
