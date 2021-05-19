@@ -9,6 +9,7 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 
@@ -38,10 +39,17 @@ public final class HttpClientUtil {
                 .build();
     }
 
-    public static List<CompletableFuture<HttpResponse<String>>> concurrentCall(HttpClient client, List<HttpRequest> httpRequestList) {
+    public static List<CompletableFuture<HttpResponse<String>>> concurrentCall( List<HttpRequest> httpRequestList) {
+
+        HttpClient httpClient = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofMillis(5000))
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .version(HttpClient.Version.HTTP_2)
+                .executor(Executors.newCachedThreadPool())
+                .build();
 
         return httpRequestList.stream()
-                .map(httpRequest -> client.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
+                .map(httpRequest -> httpClient.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
                         .thenApply(stringHttpResponse -> stringHttpResponse))
                 .collect(Collectors.toList());
     }

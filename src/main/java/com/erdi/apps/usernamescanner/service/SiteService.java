@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 
 
 @Slf4j
@@ -75,30 +73,15 @@ public class SiteService {
 
     private List<SiteListModel> sendHttpRequest(String username) throws ExecutionException, InterruptedException {
 
-        HttpClient httpClient = HttpClient.newBuilder()
-                .followRedirects(HttpClient.Redirect.ALWAYS)
-                .version(HttpClient.Version.HTTP_1_1)
-                .executor(Executors.newCachedThreadPool())
-                .build();
-
         List<SiteListModel> resultList = new LinkedList<>();
         List<HttpRequest> requestList = prepareAndBuildHttpRequest(username);
-        List<CompletableFuture<HttpResponse<String>>> callResultList = HttpClientUtil.concurrentCall(httpClient, requestList);
+        List<CompletableFuture<HttpResponse<String>>> callResultList = HttpClientUtil.concurrentCall(requestList);
 
         for (int i = 0; i < callResultList.size(); i++) {
             Source s = sourceList.get(i);
             HttpResponse<String> futureResponse = callResultList.get(i).get();
             if (futureResponse.statusCode() == 200 || futureResponse.statusCode() == 404) {
-                var status = futureResponse.statusCode() == 404 ? "Free" : "Taken";
-                SiteListModel model = new SiteListModel(
-                        s.getSiteName().replace(TARGET, username),
-                        status,
-                        s.getSiteRegisterUrl().replace(TARGET, username),
-                        s.getSiteIconUrl());
-                if (s.getMessage() != null && futureResponse.body().contains(s.getMessage())) {
-                    model.setStatus("Free");
-                }
-                resultList.add(model);
+                resultList.add(new SiteListModel(s, username, futureResponse));
             } else {
                 log.error("User: " + username + " Site: " + s.getSiteName() + " Status: " + futureResponse.statusCode());
             }

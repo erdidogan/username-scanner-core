@@ -186,7 +186,7 @@
     "siteUrl": "https://www.instagram.com/accounts/web_create_ajax/attempt/",
     "siteIconUrl": "https://instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png",
     "siteRegisterUrl": "https://www.instagram.com/{}",
-    "message": "\"code\": \"username_is_taken\"",
+    "message": "username_is_taken",
     "contentType": "application/x-www-form-urlencoded",
     "body": "username=####"
   },
@@ -195,7 +195,7 @@
     "siteUrl": "https://gql.twitch.tv/gql",
     "siteIconUrl": "https://m.twitch.tv/apple-touch-icon.png",
     "siteRegisterUrl": "https://www.twitch.tv/{}",
-    "message": "\"isUsernameAvailable\":true",
+    "message": "false",
     "contentType": "application/json",
     "body": "{\"operationName\":\"UsernameValidator_User\",\"variables\":{\"username\":\"####\"},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"fd1085cf8350e309b725cf8ca91cd90cac03909a3edeeedbd0872ac912f3d660\"}}}"
   }
