@@ -47,9 +47,9 @@ public class SiteListModel {
 
     private int getStatusForGetSource(Source source, HttpResponse<String> response) {
         if (source.getMessage() != null) {
-            return source.getMessage().contains(response.body()) ? HttpStatus.NOT_FOUND.value() : HttpStatus.OK.value();
+            return source.getMessage().contains(response.body()) ? HttpStatus.NOT_FOUND.value() : response.statusCode();
         } else {
-            return HttpStatus.OK.value();
+            return response.statusCode();
         }
     }
 }
