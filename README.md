@@ -19,12 +19,12 @@ This repo contains core logic. Please checkout [frontend part](https://github.co
 
 ## Deployment
 
-Pull docker image: 
-> docker pull erdiapps/uname-api:1.0
+Build docker image: 
+> docker build -t  erdiapps/uname-api .
 
 Run :
 
-> docker run -p 8383:8383 erdiapps/uname-api:1.0
+> docker run -p 8383:8383 erdiapps/uname-api
 
 
 ## Contributions
