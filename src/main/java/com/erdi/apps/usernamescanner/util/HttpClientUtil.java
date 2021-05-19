@@ -6,7 +6,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
@@ -22,7 +21,6 @@ public final class HttpClientUtil {
         return HttpRequest.newBuilder(URI.create(url))
                 .GET()
                 .setHeader(HttpHeaders.USER_AGENT, USER_AGENT)
-                .timeout(Duration.ofMillis(3000))
                 .build();
 
     }
@@ -39,10 +37,9 @@ public final class HttpClientUtil {
                 .build();
     }
 
-    public static List<CompletableFuture<HttpResponse<String>>> concurrentCall( List<HttpRequest> httpRequestList) {
+    public static List<CompletableFuture<HttpResponse<String>>> concurrentCall(List<HttpRequest> httpRequestList) {
 
         HttpClient httpClient = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofMillis(5000))
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .version(HttpClient.Version.HTTP_2)
                 .executor(Executors.newCachedThreadPool())

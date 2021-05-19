@@ -52,7 +52,7 @@ public class SiteService {
             return returnResult;
 
         } catch (Exception e) {
-            log.error(e.getCause().toString());
+            log.error(e.toString());
             throw new CustomHttpClientException(e.getMessage());
         }
     }
