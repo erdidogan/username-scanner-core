@@ -1,6 +1,5 @@
 package com.erdi.apps.usernamescanner.controller;
 
-import com.erdi.apps.usernamescanner.dto.SiteListResponseModel;
 import com.erdi.apps.usernamescanner.dto.SiteResponseModel;
 import com.erdi.apps.usernamescanner.service.SiteService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Slf4j
 @Validated
@@ -27,13 +25,7 @@ public class SiteController {
 
     @GetMapping("find/all")
     public Mono<SiteResponseModel> discoverUsers(@RequestParam @NotNull @Length(min = 4) String username) {
-        long startTime = System.nanoTime();
-        List<SiteListResponseModel> siteListResponseModelList = siteService.findAll(username.replaceAll("[^a-zA-Z0-9-_.]/g", ""));
-        long stopTime = System.nanoTime();
-        double elapsedTimeInSecond = ((double) (stopTime - startTime)) / 1_000_000_000;
-        log.info("discoverUsers -> " + "Execution Time: " + elapsedTimeInSecond + "Site Count: " + siteListResponseModelList.size() );
-        SiteResponseModel siteResponseModel = new SiteResponseModel(siteListResponseModelList.size(), siteListResponseModelList, elapsedTimeInSecond);
-        return Mono.just(siteResponseModel);
+        return Mono.just(siteService.findAll(username.replaceAll("[^a-zA-Z0-9-_.]/g", "")));
 
     }
 

@@ -182,13 +182,6 @@
     "message": "The specified profile could not be found."
   },
   {
-    "siteName": "Tinder",
-    "siteUrl": "https://www.gotinder.com/@{}",
-    "siteIconUrl": "https://tinder.com/favicon-32x32.png",
-    "siteRegisterUrl": "https://www.gotinder.com/@{}",
-    "message": "Looking for Someone?"
-  },
-  {
     "siteName": "Instagram",
     "siteUrl": "https://www.instagram.com/accounts/web_create_ajax/attempt/",
     "siteIconUrl": "https://instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png",
@@ -202,7 +195,7 @@
     "siteUrl": "https://gql.twitch.tv/gql",
     "siteIconUrl": "https://m.twitch.tv/apple-touch-icon.png",
     "siteRegisterUrl": "https://www.twitch.tv/{}",
-    "message": "\"isUsernameAvailable\":false",
+    "message": "\"isUsernameAvailable\":true",
     "contentType": "application/json",
     "body": "{\"operationName\":\"UsernameValidator_User\",\"variables\":{\"username\":\"####\"},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"fd1085cf8350e309b725cf8ca91cd90cac03909a3edeeedbd0872ac912f3d660\"}}}"
   }

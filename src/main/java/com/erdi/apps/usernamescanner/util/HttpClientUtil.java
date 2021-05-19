@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public final class HttpClientUtil {
         return HttpRequest.newBuilder(URI.create(url))
                 .GET()
                 .setHeader(HttpHeaders.USER_AGENT, USER_AGENT)
+                .timeout(Duration.ofMillis(3000))
                 .build();
 
     }

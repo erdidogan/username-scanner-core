@@ -7,10 +7,10 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class SiteListResponseModel {
+public class SiteListModel {
 
     private final String siteName;
-    private int statusCode;
+    private String  status;
     private final String registerUrl;
     private final String siteIconUrl;
 

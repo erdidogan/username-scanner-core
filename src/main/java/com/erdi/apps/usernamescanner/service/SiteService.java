@@ -1,7 +1,8 @@
 package com.erdi.apps.usernamescanner.service;
 
 
-import com.erdi.apps.usernamescanner.dto.SiteListResponseModel;
+import com.erdi.apps.usernamescanner.dto.SiteListModel;
+import com.erdi.apps.usernamescanner.dto.SiteResponseModel;
 import com.erdi.apps.usernamescanner.exception.CustomHttpClientException;
 import com.erdi.apps.usernamescanner.exception.SourceInitializationException;
 import com.erdi.apps.usernamescanner.source.Source;
@@ -22,7 +23,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
@@ -35,18 +35,26 @@ public class SiteService {
 
     static {
         InputStream sourceStream = SiteService.class.getResourceAsStream("/static/sources.json");
-        if(sourceStream == null)
+        if (sourceStream == null)
             throw new SourceInitializationException("Source init error! Can not find source location.");
         Source[] sources = new Gson().fromJson(new BufferedReader(new InputStreamReader(sourceStream)), Source[].class);
         sourceList = Arrays.asList(sources);
         log.info("Site init completed. Site Count: " + sourceList.size());
     }
 
-    public List<SiteListResponseModel> findAll(String username) {
+    public SiteResponseModel findAll(String username) {
         try {
-            return sendHttpRequest(username);
+            long startTime = System.nanoTime();
+            var list = sendHttpRequest(username);
+            long stopTime = System.nanoTime();
+            double elapsedTimeInSecond = ((double) (stopTime - startTime)) / 1_000_000_000;
+            var returnResult = new SiteResponseModel(list.size(), username, list, elapsedTimeInSecond);
+            log.info("User: " + returnResult.getUser() + "Site Count: " + returnResult.getSiteCount() +
+                    " Time: " + elapsedTimeInSecond);
+            return returnResult;
+
         } catch (Exception e) {
-            log.error(e.toString());
+            log.error(e.getCause().toString());
             throw new CustomHttpClientException(e.getMessage());
         }
     }
@@ -65,38 +73,37 @@ public class SiteService {
         return requestList;
     }
 
-    private List<SiteListResponseModel> sendHttpRequest(String username) throws ExecutionException, InterruptedException {
-        log.info("Async Start");
-        ExecutorService executorService = Executors.newCachedThreadPool();
+    private List<SiteListModel> sendHttpRequest(String username) throws ExecutionException, InterruptedException {
 
         HttpClient httpClient = HttpClient.newBuilder()
-                .followRedirects(HttpClient.Redirect.NORMAL)
-                .version(HttpClient.Version.HTTP_2)
-                .executor(executorService)
+                .followRedirects(HttpClient.Redirect.ALWAYS)
+                .version(HttpClient.Version.HTTP_1_1)
+                .executor(Executors.newCachedThreadPool())
                 .build();
 
-        List<SiteListResponseModel> resultList = new LinkedList<>();
+        List<SiteListModel> resultList = new LinkedList<>();
         List<HttpRequest> requestList = prepareAndBuildHttpRequest(username);
         List<CompletableFuture<HttpResponse<String>>> callResultList = HttpClientUtil.concurrentCall(httpClient, requestList);
 
         for (int i = 0; i < callResultList.size(); i++) {
             Source s = sourceList.get(i);
             HttpResponse<String> futureResponse = callResultList.get(i).get();
-            SiteListResponseModel model = new SiteListResponseModel(
-                    s.getSiteName().replace(TARGET, username),
-                    futureResponse.statusCode(),
-                    s.getSiteRegisterUrl().replace(TARGET, username),
-                    s.getSiteIconUrl());
-            if (s.getMessage() != null) {
-                if (futureResponse.body().contains(s.getMessage())) {
-                    model.setStatusCode(404);
+            if (futureResponse.statusCode() == 200 || futureResponse.statusCode() == 404) {
+                var status = futureResponse.statusCode() == 404 ? "Free" : "Taken";
+                SiteListModel model = new SiteListModel(
+                        s.getSiteName().replace(TARGET, username),
+                        status,
+                        s.getSiteRegisterUrl().replace(TARGET, username),
+                        s.getSiteIconUrl());
+                if (s.getMessage() != null && futureResponse.body().contains(s.getMessage())) {
+                    model.setStatus("Free");
                 }
+                resultList.add(model);
+            } else {
+                log.error("User: " + username + " Site: " + s.getSiteName() + " Status: " + futureResponse.statusCode());
             }
-            resultList.add(model);
-
         }
-        executorService.shutdown();
-        log.info("Async End");
+
         return resultList;
     }
 
