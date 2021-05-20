@@ -1,11 +1,10 @@
 package com.erdi.apps.usernamescanner.service;
 
-
-import com.erdi.apps.usernamescanner.dto.SiteListModel;
-import com.erdi.apps.usernamescanner.dto.SiteResponseModel;
+import com.erdi.apps.usernamescanner.dto.SiteModel;
+import com.erdi.apps.usernamescanner.dto.SourceModel;
+import com.erdi.apps.usernamescanner.dto.response.SiteResponseModel;
 import com.erdi.apps.usernamescanner.exception.CustomHttpClientException;
 import com.erdi.apps.usernamescanner.exception.SourceInitializationException;
-import com.erdi.apps.usernamescanner.source.Source;
 import com.erdi.apps.usernamescanner.util.HttpClientUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
@@ -28,16 +27,16 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class SiteService {
 
-    private static final List<Source> sourceList;
+    private static final List<SourceModel> sourceModel;
     private static final String TARGET = "{}";
 
     static {
         InputStream sourceStream = SiteService.class.getResourceAsStream("/static/sources.json");
         if (sourceStream == null)
             throw new SourceInitializationException("Source init error! Can not find source location.");
-        Source[] sources = new Gson().fromJson(new BufferedReader(new InputStreamReader(sourceStream)), Source[].class);
-        sourceList = Arrays.asList(sources);
-        log.info("Site init completed. Site Count: " + sourceList.size());
+        SourceModel[] sourceModels = new Gson().fromJson(new BufferedReader(new InputStreamReader(sourceStream)), SourceModel[].class);
+        sourceModel = Arrays.asList(sourceModels);
+        log.info("Site init completed. Site Count: " + sourceModel.size());
     }
 
     public SiteResponseModel findAll(String username) {
@@ -47,46 +46,47 @@ public class SiteService {
             long stopTime = System.nanoTime();
             double elapsedTimeInSecond = ((double) (stopTime - startTime)) / 1_000_000_000;
             var returnResult = new SiteResponseModel(list.size(), username, list, elapsedTimeInSecond);
-            log.info("User: " + returnResult.getUser() + "Site Count: " + returnResult.getSiteCount() +
-                    " Time: " + elapsedTimeInSecond);
+            log.info(returnResult.toString());
             return returnResult;
 
-        } catch (Exception e) {
-            log.error(e.toString());
+        } catch (ExecutionException | InterruptedException e) {
+            log.error(e.getCause().toString());
             throw new CustomHttpClientException(e.getMessage());
         }
     }
 
     private List<HttpRequest> prepareAndBuildHttpRequest(String username) {
         List<HttpRequest> requestList = new ArrayList<>();
-        for (Source s : sourceList) {
+        HttpClientUtil clientUtil = new HttpClientUtil();
+        for (SourceModel s : sourceModel) {
             String siteUrl = s.getSiteUrl().replace(TARGET, username);
             if (s.getBody() != null && s.getContentType() != null) {
                 String body = s.getBody().replace("####", username);
-                requestList.add(HttpClientUtil.buildPostRequest(siteUrl, s.getContentType(), body));
+                requestList.add(clientUtil.buildPostRequest(siteUrl, s.getContentType(), body));
             } else {
-                requestList.add(HttpClientUtil.buildGetRequest(siteUrl));
+                requestList.add(clientUtil.buildGetRequest(siteUrl));
             }
         }
         return requestList;
     }
 
-    private List<SiteListModel> sendHttpRequest(String username) throws ExecutionException, InterruptedException {
-
-        List<SiteListModel> resultList = new LinkedList<>();
+    private List<SiteModel> sendHttpRequest(String username) throws ExecutionException, InterruptedException {
+        HttpClientUtil clientUtil = new HttpClientUtil();
+        List<SiteModel> resultList = new LinkedList<>();
         List<HttpRequest> requestList = prepareAndBuildHttpRequest(username);
-        List<CompletableFuture<HttpResponse<String>>> callResultList = HttpClientUtil.concurrentCall(requestList);
+        List<CompletableFuture<HttpResponse<String>>> callResultList = clientUtil.concurrentCall(requestList);
 
         for (int i = 0; i < callResultList.size(); i++) {
-            Source s = sourceList.get(i);
+            SourceModel s = sourceModel.get(i);
             HttpResponse<String> futureResponse = callResultList.get(i).get();
             if (futureResponse.statusCode() == 200 || futureResponse.statusCode() == 404) {
-                resultList.add(new SiteListModel(s, username, futureResponse));
+                SiteModel siteModel = new SiteModel(s.getSiteName()
+                        , s.getSiteRegisterUrl().replace("{}", username), s.getSiteIconUrl(), futureResponse, s.getMessage());
+                resultList.add(siteModel);
             } else {
-                log.error("User: " + username + " Site: " + s.getSiteName() + " Status: " + futureResponse.statusCode());
+                log.error("User: {}, Site: {}, Future Response {}", username, s.getSiteName(), futureResponse.body());
             }
         }
-
         return resultList;
     }
 

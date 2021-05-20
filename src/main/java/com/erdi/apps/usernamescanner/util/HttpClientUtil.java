@@ -17,7 +17,7 @@ public final class HttpClientUtil {
     private static final String USER_AGENT = "Mozilla/5.0 Firefox/26.0";
 
 
-    public static HttpRequest buildGetRequest(String url) {
+    public  HttpRequest buildGetRequest(String url) {
         return HttpRequest.newBuilder(URI.create(url))
                 .GET()
                 .setHeader(HttpHeaders.USER_AGENT, USER_AGENT)
@@ -25,7 +25,7 @@ public final class HttpClientUtil {
 
     }
 
-    public static HttpRequest buildPostRequest(String url, String contentType, String body) {
+    public HttpRequest buildPostRequest(String url, String contentType, String body) {
         return HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .setHeader(HttpHeaders.USER_AGENT, USER_AGENT)
@@ -37,12 +37,12 @@ public final class HttpClientUtil {
                 .build();
     }
 
-    public static List<CompletableFuture<HttpResponse<String>>> concurrentCall(List<HttpRequest> httpRequestList) {
+    public List<CompletableFuture<HttpResponse<String>>> concurrentCall(List<HttpRequest> httpRequestList) {
 
         HttpClient httpClient = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .version(HttpClient.Version.HTTP_2)
-                .executor(Executors.newCachedThreadPool())
+                .executor(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()))
                 .build();
 
         return httpRequestList.stream()
