@@ -84,7 +84,7 @@ public class SiteService {
                         , s.getSiteRegisterUrl().replace("{}", username), s.getSiteIconUrl(), futureResponse, s.getMessage());
                 resultList.add(siteModel);
             } else {
-                log.error("User: {}, Site: {}, Future Response {}", username, s.getSiteName(), futureResponse.body());
+                log.error("User: {}, Site: {}, Status {}", username, s.getSiteName(), futureResponse.statusCode());
             }
         }
         return resultList;
