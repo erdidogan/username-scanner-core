@@ -24,7 +24,7 @@ public class SiteController {
 
     @GetMapping("find/all")
     public Mono<SiteResponseModel> discoverUsers(@RequestParam String username) {
-        if(StringUtils.hasLength(username) && username.length()>3 && username.length()< 10)
+        if(StringUtils.hasLength(username) && username.length()>3 && username.length()< 26)
             return Mono.just(siteService.findAll(username.replaceAll("[^a-zA-Z0-9-_.]/g", "")));
         else
             return Mono.just(new SiteResponseModel(0,"",new LinkedList<>(),0));

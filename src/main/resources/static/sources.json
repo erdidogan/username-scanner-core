@@ -1,9 +1,50 @@
 [
   {
-    "siteName": "BuyMeACoffee",
-    "siteUrl": "https://www.buymeacoffee.com/{}",
-    "siteIconUrl": "https://www.buymeacoffee.com/assets/img/bmc-meta-new/new/apple-icon-60x60.png?version=2021.05.11.08.46.22",
-    "siteRegisterUrl": "https://www.buymeacoffee.com/{}"
+    "siteName": "Instagram",
+    "siteUrl": "https://www.instagram.com/accounts/web_create_ajax/attempt/",
+    "siteIconUrl": "https://instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png",
+    "siteRegisterUrl": "https://www.instagram.com/{}",
+    "message": "username_is_taken",
+    "contentType": "application/x-www-form-urlencoded",
+    "body": "username=####"
+  },
+  {
+    "siteName": "Twitch",
+    "siteUrl": "https://gql.twitch.tv/gql",
+    "siteIconUrl": "https://m.twitch.tv/apple-touch-icon.png",
+    "siteRegisterUrl": "https://www.twitch.tv/{}",
+    "message": "false",
+    "contentType": "application/json",
+    "body": "{\"operationName\":\"UsernameValidator_User\",\"variables\":{\"username\":\"####\"},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"fd1085cf8350e309b725cf8ca91cd90cac03909a3edeeedbd0872ac912f3d660\"}}}"
+  },
+  {
+    "name": "Snapchat",
+    "url": "https://accounts.snapchat.com/accounts/get_username_suggestions?requested_username={}&xsrf_token=PlEcin8s5H600toD4Swngg",
+    "iconUrl": "https://accounts.snapchat.com/accounts/static/images/ghost/snapchat-app-icon.svg",
+    "registerUrl": "https://accounts.snapchat.com/accounts/signup",
+    "message": "TAKEN",
+    "contentType": "application/json",
+    "body": ""
+  },
+  {
+    "siteName": "Facebook",
+    "siteUrl": "https://en-gb.facebook.com/{}",
+    "siteIconUrl": "https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRJ1GG_y0J.ico",
+    "siteRegisterUrl": "https://en-gb.facebook.com/{}"
+  },
+  {
+    "siteName": "Twitter",
+    "siteUrl": "https://api.twitter.com/i/users/username_available.json?username={}",
+    "siteIconUrl": "https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc7275.png",
+    "siteRegisterUrl": "https://www.twitter.com/{}",
+    "message": "true"
+  },
+  {
+    "siteName": "Reddit",
+    "siteUrl": "https://www.reddit.com/api/username_available.json?user={}",
+    "siteIconUrl": "https://www.redditinc.com/assets/images/site/logo01.svg",
+    "siteRegisterUrl": "https://www.reddit.com/user/{}",
+    "message": "true"
   },
   {
     "siteName": "BuzzFeed",
@@ -16,12 +57,6 @@
     "siteUrl": "https://disqus.com/by/{}",
     "siteIconUrl": "https://c.disquscdn.com/next/current/home/img/brand/apple-touch-icon-60x60.png",
     "siteRegisterUrl": "https://disqus.com/by/{}"
-  },
-  {
-    "siteName": "Facebook",
-    "siteUrl": "https://en-gb.facebook.com/{}",
-    "siteIconUrl": "https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRJ1GG_y0J.ico",
-    "siteRegisterUrl": "https://en-gb.facebook.com/{}"
   },
   {
     "siteName": "Github",
@@ -48,16 +83,16 @@
     "siteRegisterUrl": "https://www.quora.com/profile/{}"
   },
   {
+    "siteName": "BuyMeACoffee",
+    "siteUrl": "https://www.buymeacoffee.com/{}",
+    "siteIconUrl": "https://www.buymeacoffee.com/assets/img/bmc-meta-new/new/apple-icon-60x60.png?version=2021.05.11.08.46.22",
+    "siteRegisterUrl": "https://www.buymeacoffee.com/{}"
+  },
+  {
     "siteName": "SoundCloud",
     "siteUrl": "https://soundcloud.com/{}",
     "siteIconUrl": "https://a-v2.sndcdn.com/assets/images/sc-icons/ios-a62dfc8fe7.png",
     "siteRegisterUrl": "https://soundcloud.com/{}"
-  },
-  {
-    "siteName": "Vimeo",
-    "siteUrl": "https://vimeo.com/{}",
-    "siteIconUrl": "https://f.vimeocdn.com/images_v6/favicon.ico?85987028c39a030b4783a100f20f8c78486f3865",
-    "siteRegisterUrl": "https://vimeo.com/{}"
   },
   {
     "siteName": "VK",
@@ -76,20 +111,6 @@
     "siteUrl": "https://www.tiktok.com/api/register/check/login/name/?login_name={}",
     "siteIconUrl": "https://s16.tiktokcdn.com/musical/resource/mtact/static/images/logo_144c91a.png",
     "siteRegisterUrl": "https://www.tiktok.com/@{}",
-    "message": "true"
-  },
-  {
-    "siteName": "Twitter",
-    "siteUrl": "https://api.twitter.com/i/users/username_available.json?username={}",
-    "siteIconUrl": "https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc7275.png",
-    "siteRegisterUrl": "https://www.twitter.com/{}",
-    "message": "true"
-  },
-  {
-    "siteName": "Reddit",
-    "siteUrl": "https://www.reddit.com/api/username_available.json?user={}",
-    "siteIconUrl": "https://www.redditinc.com/assets/images/site/logo01.svg",
-    "siteRegisterUrl": "https://www.reddit.com/user/{}",
     "message": "true"
   },
   {
@@ -180,24 +201,6 @@
     "siteIconUrl": "https://store.steampowered.com/favicon.ico",
     "siteRegisterUrl": "https://steamcommunity.com/id/{}",
     "message": "The specified profile could not be found."
-  },
-  {
-    "siteName": "Instagram",
-    "siteUrl": "https://www.instagram.com/accounts/web_create_ajax/attempt/",
-    "siteIconUrl": "https://instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png",
-    "siteRegisterUrl": "https://www.instagram.com/{}",
-    "message": "username_is_taken",
-    "contentType": "application/x-www-form-urlencoded",
-    "body": "username=####"
-  },
-  {
-    "siteName": "Twitch",
-    "siteUrl": "https://gql.twitch.tv/gql",
-    "siteIconUrl": "https://m.twitch.tv/apple-touch-icon.png",
-    "siteRegisterUrl": "https://www.twitch.tv/{}",
-    "message": "false",
-    "contentType": "application/json",
-    "body": "{\"operationName\":\"UsernameValidator_User\",\"variables\":{\"username\":\"####\"},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"fd1085cf8350e309b725cf8ca91cd90cac03909a3edeeedbd0872ac912f3d660\"}}}"
   }
 ]
 
