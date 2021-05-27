@@ -34,7 +34,7 @@ public class SiteModel {
         } else if (siteName.equalsIgnoreCase("twitch")) {
             message = convertedObject.get("data").getAsJsonObject().get("isUsernameAvailable").getAsString();
         } else if (siteName.equalsIgnoreCase("snapchat")) {
-            message = convertedObject.get("data").getAsJsonObject().get("status_code").getAsString();
+            message = convertedObject.get("reference").getAsJsonObject().get("status_code").getAsString();
         }
         return this.message.contains(message) ? HttpStatus.OK.value() : HttpStatus.NOT_FOUND.value();
 
