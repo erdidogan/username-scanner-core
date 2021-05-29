@@ -1,7 +1,6 @@
 package com.erdi.apps.usernamescanner.controller;
 
-import com.erdi.apps.usernamescanner.dto.SiteModel;
-import com.erdi.apps.usernamescanner.dto.response.SiteResponseModel;
+import com.erdi.apps.usernamescanner.dto.SiteResponse;
 import com.erdi.apps.usernamescanner.service.SiteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +22,10 @@ public class SiteController {
     private final SiteService siteService;
 
     @GetMapping("find/all")
-    public Mono<SiteResponseModel> discoverUsers(@RequestParam String username) {
+    public Mono<SiteResponse> discoverUsers(@RequestParam String username) {
         if(StringUtils.hasLength(username) && username.length()>3 && username.length()< 26)
             return Mono.just(siteService.findAll(username.replaceAll("[^a-zA-Z0-9-_.]/g", "")));
         else
-            return Mono.just(new SiteResponseModel(0,"",new LinkedList<>(),0));
-
+            return Mono.just(new SiteResponse("",new LinkedList<>(),0));
     }
-
 }

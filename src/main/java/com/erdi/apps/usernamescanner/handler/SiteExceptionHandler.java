@@ -1,6 +1,6 @@
 package com.erdi.apps.usernamescanner.handler;
 
-import com.erdi.apps.usernamescanner.dto.response.ErrorResponse;
+import com.erdi.apps.usernamescanner.dto.ErrorResponse;
 import com.erdi.apps.usernamescanner.exception.CustomHttpClientException;
 import com.erdi.apps.usernamescanner.exception.SourceInitializationException;
 import org.springframework.http.HttpStatus;

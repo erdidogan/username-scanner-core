@@ -1,4 +1,4 @@
-package com.erdi.apps.usernamescanner.dto.response;
+package com.erdi.apps.usernamescanner.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,9 +1,7 @@
-package com.erdi.apps.usernamescanner.dto;
+package com.erdi.apps.usernamescanner.model;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Objects;
 
 @Getter
 @Setter
