@@ -8,5 +8,4 @@ public interface HttpClientService {
 
     List<CompletableFuture<HttpResponse<String>>> makeConcurrentGetCall(String username);
 
-
 }

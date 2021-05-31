@@ -8,6 +8,7 @@ import com.erdi.apps.usernamescanner.model.SourceModel;
 import com.erdi.apps.usernamescanner.service.HttpClientService;
 import com.erdi.apps.usernamescanner.service.SiteService;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -76,9 +77,11 @@ public class SiteServiceImpl implements SiteService {
 
     private int getStatusForPostSource(HttpResponse<String> response, SourceModel sourceModel) {
         JsonObject convertedObject = new Gson().fromJson(response.body(), JsonObject.class);
-        String message = "";
+        String message = "####";
         if (sourceModel.getSiteName().equalsIgnoreCase("instagram")) {
-            message = convertedObject.getAsJsonObject("errors").getAsJsonArray("username").get(0).getAsJsonObject().get("code").getAsString();
+            JsonArray responseArray = convertedObject.getAsJsonObject("errors").getAsJsonArray("username");
+            if(responseArray != null)
+                message = responseArray.get(0).getAsJsonObject().get("code").getAsString();
         } else if (sourceModel.getSiteName().equalsIgnoreCase("twitch")) {
             message = convertedObject.get("data").getAsJsonObject().get("isUsernameAvailable").getAsString();
         } else if (sourceModel.getSiteName().equalsIgnoreCase("snapchat")) {
