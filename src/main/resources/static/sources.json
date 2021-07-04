@@ -115,10 +115,10 @@
   },
   {
     "siteName": "HackerNews",
-    "siteUrl": "https://hacker-news.firebaseio.com/v0/user/{}.json",
+    "siteUrl": "https://news.ycombinator.com/user?id={}",
     "siteIconUrl": "https://news.ycombinator.com/favicon.ico",
     "siteRegisterUrl": "https://news.ycombinator.com/user?id={}",
-    "message": "null"
+    "message": "No such user."
   },
   {
     "siteName": "Patreon",

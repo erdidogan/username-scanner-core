@@ -93,7 +93,7 @@ public class SiteServiceImpl implements SiteService {
 
     private int getStatusForGetSource(HttpResponse<String> response, SourceModel sourceModel) {
         if (sourceModel.getMessage() != null) {
-            return sourceModel.getMessage().contains(response.body()) ? HttpStatus.NOT_FOUND.value() : response.statusCode();
+            return response.body().contains(sourceModel.getMessage()) ? HttpStatus.NOT_FOUND.value() : response.statusCode();
         } else {
             return response.statusCode();
         }
