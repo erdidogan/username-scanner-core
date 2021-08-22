@@ -8,7 +8,7 @@ RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml package
 
 FROM openjdk:17-slim-buster
 
-EXPOSE 8383
+EXPOSE 8080
 
 RUN mkdir /app
 COPY --from=MAVEN_TOOL_CHAIN /tmp/target/*.jar /app/spring-boot-application.jar

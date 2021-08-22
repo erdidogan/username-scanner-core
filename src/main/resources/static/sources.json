@@ -1,31 +1,5 @@
 [
-  {
-    "siteName": "Instagram",
-    "siteUrl": "https://www.instagram.com/accounts/web_create_ajax/attempt/",
-    "siteIconUrl": "https://instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png",
-    "siteRegisterUrl": "https://www.instagram.com/{}",
-    "message": "username_is_taken",
-    "contentType": "application/x-www-form-urlencoded",
-    "body": "username=####"
-  },
-  {
-    "siteName": "Twitch",
-    "siteUrl": "https://gql.twitch.tv/gql",
-    "siteIconUrl": "https://m.twitch.tv/apple-touch-icon.png",
-    "siteRegisterUrl": "https://www.twitch.tv/{}",
-    "message": "false",
-    "contentType": "application/json",
-    "body": "{\"operationName\":\"UsernameValidator_User\",\"variables\":{\"username\":\"####\"},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"fd1085cf8350e309b725cf8ca91cd90cac03909a3edeeedbd0872ac912f3d660\"}}}"
-  },
-  {
-    "siteName": "Snapchat",
-    "siteUrl": "https://accounts.snapchat.com/accounts/get_username_suggestions?requested_username={}&xsrf_token=PlEcin8s5H600toD4Swngg",
-    "siteIconUrl": "https://accounts.snapchat.com/accounts/static/images/ghost/snapchat-app-icon.svg",
-    "siteRegisterUrl": "https://accounts.snapchat.com/accounts/signup",
-    "message": "TAKEN",
-    "contentType": "application/json",
-    "body": ""
-  },
+
   {
     "siteName": "Facebook",
     "siteUrl": "https://en-gb.facebook.com/{}",

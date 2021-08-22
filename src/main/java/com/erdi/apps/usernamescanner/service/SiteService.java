@@ -1,10 +1,10 @@
 package com.erdi.apps.usernamescanner.service;
 
-import com.erdi.apps.usernamescanner.dto.SiteResponse;
+import com.erdi.apps.usernamescanner.dto.SiteResponseModel;
 
 public interface SiteService {
 
-    SiteResponse findAll(String username);
+    SiteResponseModel findAll(String username);
 
 
 }

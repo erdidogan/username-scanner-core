@@ -1,15 +1,12 @@
 package com.erdi.apps.usernamescanner.service.impl;
 
 import com.erdi.apps.usernamescanner.UsernameScannerApplication;
-import com.erdi.apps.usernamescanner.dto.SiteResponse;
+import com.erdi.apps.usernamescanner.dto.SiteResponseModel;
 import com.erdi.apps.usernamescanner.exception.CustomHttpClientException;
 import com.erdi.apps.usernamescanner.model.SiteModel;
 import com.erdi.apps.usernamescanner.model.SourceModel;
 import com.erdi.apps.usernamescanner.service.HttpClientService;
 import com.erdi.apps.usernamescanner.service.SiteService;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.net.http.HttpResponse;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -29,14 +27,13 @@ public class SiteServiceImpl implements SiteService {
     private final HttpClientService httpClientService;
 
     @Override
-    public SiteResponse findAll(String username) {
-        long startTime = System.nanoTime();
-        var list = sendHttpRequest(username);
-        long stopTime = System.nanoTime();
-        double elapsedTimeInSecond = ((double) (stopTime - startTime)) / 1_000_000_000;
-        var returnResult = new SiteResponse(username, list, elapsedTimeInSecond);
-        log.info(returnResult.toString());
-        return returnResult;
+    public SiteResponseModel findAll(String username) {
+        long startTime = System.currentTimeMillis();
+        var list = sendHttpRequest(username.replaceAll("[^a-zA-Z0-9-_.]/g", ""));
+        long stopTime = System.currentTimeMillis();
+        double elapsedTimeInSecond = stopTime - startTime;
+        log.warn("Execution completed in {} ms", elapsedTimeInSecond);
+        return new SiteResponseModel(username, list);
     }
 
 
@@ -70,33 +67,10 @@ public class SiteServiceImpl implements SiteService {
     }
 
     private int getStatus(HttpResponse<String> response, SourceModel sourceModel) {
-        return response.request().method().equalsIgnoreCase("post") ?
-                this.getStatusForPostSource(response, sourceModel) : this.getStatusForGetSource(response, sourceModel);
-    }
-
-
-    private int getStatusForPostSource(HttpResponse<String> response, SourceModel sourceModel) {
-        JsonObject convertedObject = new Gson().fromJson(response.body(), JsonObject.class);
-        String message = "####";
-        if (sourceModel.getSiteName().equalsIgnoreCase("instagram")) {
-            JsonArray responseArray = convertedObject.getAsJsonObject("errors").getAsJsonArray("username");
-            if(responseArray != null)
-                message = responseArray.get(0).getAsJsonObject().get("code").getAsString();
-        } else if (sourceModel.getSiteName().equalsIgnoreCase("twitch")) {
-            message = convertedObject.get("data").getAsJsonObject().get("isUsernameAvailable").getAsString();
-        } else if (sourceModel.getSiteName().equalsIgnoreCase("snapchat")) {
-            message = convertedObject.get("reference").getAsJsonObject().get("status_code").getAsString();
-        }
-        return sourceModel.getMessage().contains(message) ? HttpStatus.OK.value() : HttpStatus.NOT_FOUND.value();
-
-    }
-
-    private int getStatusForGetSource(HttpResponse<String> response, SourceModel sourceModel) {
-        if (sourceModel.getMessage() != null) {
-            return response.body().contains(sourceModel.getMessage()) ? HttpStatus.NOT_FOUND.value() : response.statusCode();
-        } else {
+        if (Objects.isNull(sourceModel.getMessage())) {
             return response.statusCode();
         }
+        return response.body().contains(sourceModel.getMessage()) ? HttpStatus.NOT_FOUND.value() : response.statusCode();
     }
 
 }

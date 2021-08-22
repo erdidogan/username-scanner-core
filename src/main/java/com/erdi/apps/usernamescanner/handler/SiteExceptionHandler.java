@@ -1,6 +1,6 @@
 package com.erdi.apps.usernamescanner.handler;
 
-import com.erdi.apps.usernamescanner.dto.ErrorResponse;
+import com.erdi.apps.usernamescanner.dto.ErrorResponseModel;
 import com.erdi.apps.usernamescanner.exception.CustomHttpClientException;
 import com.erdi.apps.usernamescanner.exception.SourceInitializationException;
 import org.springframework.http.HttpStatus;
@@ -17,15 +17,22 @@ public class SiteExceptionHandler {
 
     @ExceptionHandler(SourceInitializationException.class)
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
-    public Mono<ErrorResponse> sourceInitializationException(SourceInitializationException ex) {
-        ErrorResponse error = new ErrorResponse(ex.getMessage(), new Timestamp(System.currentTimeMillis()));
+    public Mono<ErrorResponseModel> sourceInitializationException(SourceInitializationException ex) {
+        ErrorResponseModel error = new ErrorResponseModel(ex.getMessage(), new Timestamp(System.currentTimeMillis()));
         return Mono.just(error);
     }
 
     @ExceptionHandler(CustomHttpClientException.class)
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
-    public Mono<ErrorResponse> customHttpClientException(CustomHttpClientException ex) {
-        ErrorResponse error = new ErrorResponse(ex.getMessage(), new Timestamp(System.currentTimeMillis()));
+    public Mono<ErrorResponseModel> customHttpClientException(CustomHttpClientException ex) {
+        ErrorResponseModel error = new ErrorResponseModel(ex.getMessage(), new Timestamp(System.currentTimeMillis()));
+        return Mono.just(error);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    public Mono<ErrorResponseModel> exception(CustomHttpClientException ex) {
+        ErrorResponseModel error = new ErrorResponseModel(ex.getMessage(), new Timestamp(System.currentTimeMillis()));
         return Mono.just(error);
     }
 
