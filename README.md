@@ -1,4 +1,4 @@
-# Username - Scanner - Core- Reactive
+# Username - Scanner - Core
 
 Rapid & Accurate Username Finder
 
@@ -6,11 +6,9 @@ This repo contains core logic. Please checkout [frontend part](https://github.co
 
 ## Feauteres
 
-* Spring Boot Reactive Rest API
+* Spring Boot Rest API
 * Java 11
 * Java 11 Http Client
-* Webflux
-* Netty
 * Docker
 
 ## Author
@@ -24,7 +22,7 @@ Build docker image:
 
 Run :
 
-> docker run -p 8383:8383 erdiapps/uname-api
+> docker run -p 8080:8080 erdiapps/uname-api
 
 
 ## Contributions

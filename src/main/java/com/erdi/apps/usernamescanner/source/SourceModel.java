@@ -1,4 +1,4 @@
-package com.erdi.apps.usernamescanner.model;
+package com.erdi.apps.usernamescanner.source;
 
 import lombok.Getter;
 import lombok.Setter;

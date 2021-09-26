@@ -1,4 +1,4 @@
-package com.erdi.apps.usernamescanner.dto;
+package com.erdi.apps.usernamescanner.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
